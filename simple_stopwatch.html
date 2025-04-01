@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>stopwatch</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 125px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        #time {
+            font-size: 2em;
+            margin: 20px 0;
+            transition: color 0.5s ease-in-out;
+        }
+
+        .running {
+            color: green;
+        }
+
+        .stopped {
+            color: red;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            border: none;
+            color: white;
+            background: #109c27;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>stopwatch</h2>
+        <div id="time">00:00:00</div>
+        <button onclick="startT()">start</button>
+        <button onclick="stopT()">stop</button>
+        <button onclick="reset()">reset</button>
+    </div>
+
+    <script>
+        let timer;
+        let seconds = 0, minutes = 0, hours = 0;
+        let running = false;
+
+        function update() {
+            seconds++;
+            if (seconds == 60) {
+                seconds = 0;
+                minutes++;
+                if (minutes == 60) {
+                    minutes = 0;
+                    hours++;
+                }
+            }
+            document.getElementById("time").innerText =
+                String(hours).padStart(2, "0") + ":" + String(minutes).padStart(2, "0") + ":" + String(seconds).padStart(2, "0")
+
+                <!--turning the integers into strings and making sure there are always 2 numbers displayed at the same time-->
+
+        }
+
+        function startT() {
+            if (!running) {
+                running = true;
+                document.getElementById("time").classList.add("running");
+                document.getElementById("time").classList.remove("stopped");
+                timer = setInterval(update, 1000);
+            }
+        }
+
+        function stopT() {
+            running = false;
+            clearInterval(timer);
+            document.getElementById("time").classList.add("stopped");
+            document.getElementById("time").classList.remove("running");
+        }
+
+        function reset() {
+            stop();
+            seconds = 0;
+            minutes = 0;
+            hours = 0;
+            document.getElementById("time").innerText = "00:00:00";
+        }
+
+    </script>
+</body>
+</html>
