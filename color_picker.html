@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>-</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            transition: background 0.5s ease;
+        }
+        h2 {
+            margin-top: 50px;
+        }
+        input {
+            margin-top: 20px;
+            width: 150px;
+            height: 50px;
+            border: solid;
+            cursor: pointer;
+        }
+        #colorCode {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>choose a color you like and see what happens!</h2>
+    <input type="color" id="colorPicker">
+    <p id="colorCode">#ffffff</p>
+
+    <script>
+        let colorPicker = document.getElementById("colorPicker");
+        let colorCode = document.getElementById("colorCode");
+        colorPicker.addEventListener("input", () => {
+            document.body.style.backgroundColor = colorPicker.value;
+            colorCode.textContent = colorPicker.value.toUpperCase();
+        });
+    </script>
+
+</body>
+</html>
